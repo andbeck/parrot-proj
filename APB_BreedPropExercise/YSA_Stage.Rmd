@@ -55,7 +55,7 @@ knitr::include_graphics("LifeTable_YSA.png")
 
 ## The modelling
 
-To undertake the LSA, vital rates were randomly drawn. Fecundity was sampled from a lognormal distribution and both survival rates were sampled from a beta-distribution. These distributions are drawn from field data (see data_sources). Due to a lack of data, a pre-speciﬁed variance–covariance structure among vital rates could not be used to select vital rates and therefore there is no covariation in this analysis. From each set of vital rates, a matrix population model was then constructed, this is repeated 1000 times, constructing 1000 matrix replicates. 
+To undertake the LSA, vital rates were randomly drawn. Fecundity was sampled from a lognormal distribution and both survival rates were sampled from a beta-distribution. These distributions are drawn from field data (see data_sources). Due to a lack of data, a pre-specified variance–covariance structure among vital rates could not be used to select vital rates and therefore there is no covariation in this analysis. From each set of vital rates, a matrix population model was then constructed, this is repeated 1000 times, constructing 1000 matrix replicates. 
 
 ### Stable Stage Distributions
 
@@ -70,9 +70,9 @@ mat1 <- map(1:1000, function(x) ysaFunc(yellow))
 
 ## stable stage
 stages <- map_dfr(mat1, function(x) popbio::stable.stage(x)) %>% 
-  dplyr::rename(Egg = col1, Juvenile = col2, Adult = col3) %>% 
+  dplyr::rename(Fledgling = col1, Juvenile = col2, Adult = col3) %>% 
   pivot_longer(everything(), names_to = "Stage", values_to = "Proportion") %>% 
-  mutate(Stage = factor(Stage, levels = c("Egg", "Juvenile", "Adult")))
+  mutate(Stage = factor(Stage, levels = c("Fledgling", "Juvenile", "Adult")))
 
 medians <- stages %>% 
   dplyr::group_by(Stage) %>% 
