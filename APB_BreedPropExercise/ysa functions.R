@@ -24,22 +24,22 @@ ysaFunc <- function (dataSource)
       betaval(mu, sqrt((1 - mu)*mu) - 0.01, fx=runif(1))      
     }
   })
-  names(p) <- c("p1a", "p1b", "p1c", "p2", "p3")
+  names(p) <- c("p1", "p2", "p3")
   ## this adds elements of the list to the current environment
   list2env(p, envir = environment())
   #f
-  f3 <- rnorm(1, mean = (dataSource$f[5]), sd = (dataSource$fSD[5])) 
+  f3 <- rnorm(1, mean = (dataSource$f[3]), sd = (dataSource$fSD[3])) 
   
   # Pi <- ((1 - (pi^(di - 1)))/(1 - (pi^di)))*pi ------- equation for Pi's
   # Gi <- (pi^di*(1 - pi))/(1 - pi^di)           ------- equation for Gi's
   
   #d
-  d1 <- dataSource$di[1] + dataSource$di[2] + dataSource$di[3]
-  d2 <- dataSource$di[4]
-  d3 <- dataSource$di[5]
+  d1 <- dataSource$di[1]
+  d2 <- dataSource$di[2]
+  d3 <- dataSource$di[3]
   
   # this uses p1's defined above
-  p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
+  ##p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
   #add ps 
   
   # construct the matrix using defined parameters above
@@ -67,25 +67,23 @@ ysaFunc <- function (dataSource)
 ysameanFunc <- function (dataSource) 
 { 
   #ps
-  p1a<- dataSource$pi[1]
-  p1b<- dataSource$pi[2]
-  p1c<- dataSource$pi[3]
-  p2 <- dataSource$pi[4]
-  p3 <- dataSource$pi[5]
-  
+  p1<- dataSource$pi[1]
+  p2<- dataSource$pi[2]
+  p3<- dataSource$pi[3]
+
   #f
-  f3 <- dataSource$f[5] #should 3.3 be divided by 2  
+  f3 <- dataSource$f[3]
   
   # Pi <- ((1 - (pi^(di - 1)))/(1 - (pi^di)))*pi ------- equation for Pi's
   # Gi <- (pi^di*(1 - pi))/(1 - pi^di)           ------- equation for Gi's
   
   #d
-  d1 <- dataSource$di[1] + dataSource$di[2] + dataSource$di[3]
-  d2 <- dataSource$di[4]
-  d3 <- dataSource$di[5]
+  d1 <- dataSource$di[1]
+  d2 <- dataSource$di[2]
+  d3 <- dataSource$di[3]
   
   # this uses p1's defined above
-  p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
+  ##p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
   #add ps 
   
   # construct the matrix using defined parameters above
@@ -113,38 +111,34 @@ ysaFuncDD <- function (dataSource, n, threshold, stochastic = FALSE)
 {
   if (stochastic) {
     #ps
-    p1a<- betaval((dataSource$pi[1]), (dataSource$piSD[1]), fx=runif(1)) 
-    p1b<- betaval((dataSource$pi[2]), (dataSource$piSD[2]), fx=runif(1)) 
-    p1c<- betaval((dataSource$pi[3]), (dataSource$piSD[3]), fx=runif(1))
-    p2 <- betaval((dataSource$pi[4]), (dataSource$piSD[4]), fx=runif(1))
-    p3 <- betaval((dataSource$pi[5]), (dataSource$piSD[5]), fx=runif(1))
+    p1 <- betaval((dataSource$pi[1]), (dataSource$piSD[1]), fx=runif(1)) 
+    p2 <- betaval((dataSource$pi[2]), (dataSource$piSD[2]), fx=runif(1))
+    p3 <- betaval((dataSource$pi[3]), (dataSource$piSD[3]), fx=runif(1))
     
     # F
     # N > M  -> (M*F)/N
     # N <= M ->  F
-    f3 <- rnorm(1, mean = (dataSource$f[5]), sd = (dataSource$fSD[5])) 
+    f3 <- rnorm(1, mean = (dataSource$f[3]), sd = (dataSource$fSD[3])) 
   } else {
     #ps
-    p1a<- dataSource$pi[1]
-    p1b<- dataSource$pi[2]
-    p1c<- dataSource$pi[3]
-    p2 <- dataSource$pi[4]
-    p3 <- dataSource$pi[5]
+    p1 <- dataSource$pi[1]
+    p2 <- dataSource$pi[2]
+    p3 <- dataSource$pi[3]
     
     #f
-    f3 <- dataSource$f[5]
+    f3 <- dataSource$f[3]
   }
   
   # Pi <- ((1 - (pi^(di - 1)))/(1 - (pi^di)))*pi ------- equation for Pi's
   # Gi <- (pi^di*(1 - pi))/(1 - pi^di)           ------- equation for Gi's
   
   #d
-  d1 <- dataSource$di[1] + dataSource$di[2] + dataSource$di[3]
-  d2 <- dataSource$di[4]
-  d3 <- dataSource$di[5]
+  d1 <- dataSource$di[1]
+  d2 <- dataSource$di[2]
+  d3 <- dataSource$di[3]
   
   # this uses p1's defined above
-  p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
+  ##p1 <- (p1a*p1b*p1c) # this stage as the survival is from the multiplication of  p1a, p1b and p1c
   #add ps 
   
   # construct the matrix using defined parameters above
